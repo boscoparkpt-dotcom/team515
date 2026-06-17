@@ -75,6 +75,7 @@ const DATA = {
     { role:"고문", name:"이준호" },
   ],
 
-  /* ───── 가입 안내 링크 (오픈채팅 등) ───── */
-  joinLink: "https://open.kakao.com/o/gwuyx2zi",
+  /* ───── 외부 연결 링크 ───── */
+  joinLink: "https://open.kakao.com/o/gwuyx2zi",  // 카카오톡 오픈채팅(가입)
+  instagram: "",                                   // 인스타 주소 (예: https://instagram.com/team515) — 생기면 넣기
 };

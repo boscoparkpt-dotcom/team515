@@ -41,7 +41,47 @@
   .slogan{color:var(--sub);font-size:12px;margin-top:5px;letter-spacing:.3px}
 
   .section-title{font-size:13px;font-weight:700;color:var(--sub);
-    text-transform:uppercase;letter-spacing:1px;margin:22px 4px 10px}
+    text-transform:uppercase;letter-spacing:1px;margin:26px 4px 12px}
+
+  /* ── landing hero ── */
+  .lhero{position:relative;text-align:center;padding:52px 16px 40px;overflow:hidden;
+    border-bottom:1px solid var(--line)}
+  .lhero-bg{position:absolute;inset:0;background:
+    radial-gradient(120% 80% at 50% -10%,rgba(255,90,60,.30),transparent 60%),
+    linear-gradient(180deg,#161b26,#0b0e14)}
+  .lhero-in{position:relative}
+  .logo.big{font-size:46px;letter-spacing:-1px}
+  .lhero-pitch{font-size:22px;font-weight:800;line-height:1.35;margin:14px 0 8px}
+  .slogan.big{font-size:15px;color:var(--accent);font-weight:700;letter-spacing:.5px}
+  .cta-row{display:flex;gap:10px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+  .btn{text-decoration:none;font-weight:700;font-size:14px;padding:13px 22px;border-radius:99px;
+    border:1px solid transparent;display:inline-block}
+  .btn.primary{background:var(--accent);color:#fff}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn.block{display:block;text-align:center;width:100%;padding:16px}
+
+  /* ── about ── */
+  .about{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:18px;font-size:15px;line-height:1.65;color:var(--ink)}
+  .about b{color:var(--accent)}
+  .meaning{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+  .mi{background:var(--card2);border-radius:12px;padding:13px}
+  .mt{font-weight:800;font-size:15px;color:var(--accent)}
+  .md{color:var(--sub);font-size:12px;margin-top:4px;line-height:1.5}
+
+  /* ── training preview strip ── */
+  .tprev{display:flex;gap:8px;justify-content:space-between}
+  .tp{flex:1;background:var(--card);border:1px solid var(--line);border-radius:13px;
+    padding:12px 4px;text-align:center}
+  .tp .tpd{font-weight:800;font-size:14px}
+  .tp .tpi{font-size:22px;margin:4px 0}
+
+  /* ── join cta ── */
+  .joincta{background:linear-gradient(160deg,#1f2531,#151a24);border:1px solid var(--line);
+    border-radius:18px;padding:22px;text-align:center;margin-top:8px}
+  .jc-t{font-size:17px;font-weight:700;line-height:1.45;margin-bottom:16px}
+  .jc-t b{color:var(--accent)}
+  .jc-s{color:var(--sub);font-size:12px;margin-top:12px;line-height:1.5}
 
   /* ── home hero (next race countdown) ── */
   .hero{background:linear-gradient(160deg,#1b212e,#151a24);border:1px solid var(--line);
@@ -144,28 +184,68 @@
 </head>
 <body>
 
-<!-- ══════ 홈 ══════ -->
+<!-- ══════ 홈 (공개 랜딩) ══════ -->
 <section class="view on" id="v-home">
-  <header>
-    <div class="logo">Team<b>515</b></div>
-    <div class="slogan">5:15 AM. No Excuses.</div>
-  </header>
+  <!-- HERO -->
+  <div class="lhero">
+    <div class="lhero-bg"></div>
+    <div class="wrap lhero-in">
+      <div class="logo big">Team<b>515</b></div>
+      <div class="lhero-pitch">미동부 최초 · 최대 · 최강<br>한인 철인클럽</div>
+      <div class="slogan big">"5:15 AM. No Excuses."</div>
+      <div class="cta-row">
+        <a class="btn primary" id="ctaJoin" href="#" target="_blank" rel="noopener">가입 문의 →</a>
+        <a class="btn ghost" id="ctaIG" href="#" target="_blank" rel="noopener">📷 Instagram</a>
+      </div>
+    </div>
+  </div>
+
   <div class="wrap">
+    <!-- NEXT RACE -->
+    <div class="section-title">다음 레이스</div>
     <div id="hero"></div>
     <div class="quick">
       <div class="qcard"><div class="qn" id="q-races">–</div><div class="ql">예정 레이스</div></div>
+      <div class="qcard"><div class="qn">5×</div><div class="ql">주간 새벽 훈련</div></div>
       <div class="qcard"><div class="qn" id="q-members">–</div><div class="ql">운영진</div></div>
     </div>
+
+    <!-- WHO WE ARE -->
+    <div class="section-title">우리는 이런 팀</div>
+    <div class="about">
+      단순한 친목 모임이 아닙니다. 함께 훈련하고 성장하며 매년 주요 철인 대회에 출전하는,
+      <b>진지한 철인들의 팀</b>입니다.
+      <div class="meaning">
+        <div class="mi"><div class="mt">새벽 5:15</div><div class="md">남들 잘 때 일어나 훈련하는 독함</div></div>
+        <div class="mi"><div class="mt">70.3 골타임 5:15</div><div class="md">항상 더 높은 목표를 향한 도전</div></div>
+      </div>
+    </div>
+
+    <!-- WHAT WE DO -->
+    <div class="section-title">우리가 하는 것 · 주간 훈련</div>
+    <div id="trainPreview" class="tprev"></div>
+    <div class="note" style="text-align:center">매일 새벽 5:15 시작 · 주 1회 이상 참여</div>
+
+    <!-- VALUES -->
     <div class="motto">
       <b>Train Together · Race Together · Become Iron Together</b>
       <div class="m2">혼자 빠른 선수보다, 함께 강한 팀.</div>
     </div>
+
+    <!-- JOIN CTA -->
+    <div class="joincta">
+      <div class="jc-t">한번 해볼까 말고, <b>하고 싶다</b>는 당신을 찾습니다</div>
+      <a class="btn primary block" id="ctaJoin2" href="#" target="_blank" rel="noopener">오픈채팅방 입장하기 →</a>
+      <div class="jc-s">관망·정보수집 목적은 정리됩니다 · 자세한 규정은 아래 [클럽] 탭</div>
+    </div>
+
+    <!-- INSTALL -->
     <div class="install" id="install">
       📲 <b>홈 화면에 앱으로 추가</b><br>
-      <span id="ios-hint">iPhone: Safari 하단 <b>공유</b> → <b>홈 화면에 추가</b></span><br>
-      <span>Android: Chrome 메뉴(⋮) → <b>앱 설치</b> / <b>홈 화면에 추가</b></span>
+      <span>iPhone: Safari 하단 <b>공유</b> → <b>홈 화면에 추가</b></span><br>
+      <span>Android: Chrome 메뉴(⋮) → <b>앱 설치</b></span>
     </div>
-    <footer>미동부 최초·최대·최강의 한인 철인클럽</footer>
+    <footer>Team515 · NY/NJ Korean Triathlon Club</footer>
   </div>
 </section>
 
@@ -262,6 +342,16 @@ function renderHome(){
   }
   document.getElementById("q-races").textContent=up.length;
   document.getElementById("q-members").textContent=DATA.staff.length;
+
+  // 링크
+  [ "ctaJoin","ctaJoin2" ].forEach(id=>{const el=document.getElementById(id);
+    if(DATA.joinLink)el.href=DATA.joinLink; else el.style.display="none";});
+  const ig=document.getElementById("ctaIG");
+  if(DATA.instagram)ig.href=DATA.instagram; else ig.style.display="none";
+
+  // 주간 훈련 미리보기
+  document.getElementById("trainPreview").innerHTML=DATA.training.map(t=>
+    `<div class="tp"><div class="tpd">${t.day}</div><div class="tpi">${t.icon}</div></div>`).join("");
 }
 
 /* 레이스 */
