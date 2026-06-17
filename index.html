@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<title>Team515</title>
+<meta name="theme-color" content="#0b0e14">
+
+<!-- PWA / iOS 홈 화면 추가 -->
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Team515">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/favicon-32.png">
+
+<style>
+  :root{
+    --bg:#0b0e14; --card:#151a24; --card2:#1b212e;
+    --ink:#e8edf5; --sub:#8b95a7; --line:#262d3a;
+    --accent:#ff5a3c;
+    --sprint:#3ec9a7; --oly:#4d9fff; --half:#ff9f43; --full:#ff5a3c; --etc:#9b8cff;
+    --nav-h:64px; --safe-b:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:calc(var(--nav-h) + var(--safe-b) + 16px);
+    padding-top:env(safe-area-inset-top,0px)}
+  .wrap{max-width:680px;margin:0 auto;padding:0 16px}
+  .view{display:none;animation:fade .25s ease}
+  .view.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* ── header ── */
+  header{text-align:center;padding:26px 16px 8px}
+  .logo{font-size:26px;font-weight:800;letter-spacing:-.5px}
+  .logo b{color:var(--accent)}
+  .slogan{color:var(--sub);font-size:12px;margin-top:5px;letter-spacing:.3px}
+
+  .section-title{font-size:13px;font-weight:700;color:var(--sub);
+    text-transform:uppercase;letter-spacing:1px;margin:22px 4px 10px}
+
+  /* ── home hero (next race countdown) ── */
+  .hero{background:linear-gradient(160deg,#1b212e,#151a24);border:1px solid var(--line);
+    border-radius:20px;padding:22px;text-align:center;margin-top:14px;position:relative;overflow:hidden}
+  .hero:before{content:"";position:absolute;top:-40px;right:-40px;width:140px;height:140px;
+    background:radial-gradient(circle,rgba(255,90,60,.25),transparent 70%)}
+  .hero .label{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:1px}
+  .hero .rname{font-size:20px;font-weight:800;margin:8px 0 2px}
+  .hero .rmeta{color:var(--sub);font-size:13px}
+  .hero .dd{font-size:54px;font-weight:800;line-height:1;margin:14px 0 2px;letter-spacing:-2px}
+  .hero .ddsub{color:var(--sub);font-size:12px}
+
+  .quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  .qcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+  .qcard .qn{font-size:22px;font-weight:800}
+  .qcard .ql{color:var(--sub);font-size:12px;margin-top:2px}
+
+  .motto{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px;text-align:center;margin-top:14px}
+  .motto b{color:var(--accent)}
+  .motto .m2{color:var(--sub);font-size:13px;margin-top:6px}
+
+  /* ── toggle ── */
+  .toggle{display:flex;gap:8px;justify-content:center;margin:14px 0 4px}
+  .toggle button{background:var(--card);color:var(--sub);border:1px solid var(--line);
+    border-radius:99px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer}
+  .toggle button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+  /* ── race card ── */
+  .month{font-size:12px;font-weight:700;color:var(--sub);letter-spacing:1px;margin:20px 4px 8px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+  .card.past{opacity:.5}
+  .date{flex:0 0 52px;text-align:center;background:var(--card2);border-radius:11px;padding:8px 4px}
+  .date .d{font-size:21px;font-weight:800;line-height:1}
+  .date .m{font-size:10px;color:var(--sub);margin-top:3px}
+  .date .y{font-size:9px;color:#5a6473;margin-top:1px}
+  .cbody{flex:1;min-width:0}
+  .row1{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .rn{font-size:15px;font-weight:700}
+  .badge{font-size:10px;font-weight:700;padding:3px 7px;border-radius:6px;color:#0b0e14;white-space:nowrap}
+  .b-sprint{background:var(--sprint)} .b-oly{background:var(--oly)}
+  .b-half{background:var(--half)} .b-full{background:var(--full);color:#fff} .b-etc{background:var(--etc)}
+  .meta{color:var(--sub);font-size:12px;margin-top:4px;display:flex;gap:9px;flex-wrap:wrap}
+  .dday{color:var(--accent);font-weight:700}
+  .members{margin-top:9px;display:flex;gap:5px;flex-wrap:wrap}
+  .chip{font-size:11px;background:var(--card2);border:1px solid var(--line);border-radius:99px;padding:3px 9px}
+  .chip.empty{color:var(--sub);font-style:italic}
+  .chip.cnt{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700}
+  .empty-state{text-align:center;color:var(--sub);padding:36px 16px;font-size:14px}
+
+  /* ── training ── */
+  .trow{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:14px}
+  .tday{flex:0 0 40px;height:40px;border-radius:11px;background:var(--card2);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}
+  .ticon{font-size:22px}
+  .ttitle{font-weight:700;font-size:15px}
+  .note{color:var(--sub);font-size:12px;line-height:1.6;margin-top:8px;padding:0 4px}
+
+  /* ── levels ── */
+  .lvl{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:12px 14px;margin-bottom:8px}
+  .ldot{width:10px;height:10px;border-radius:50%}
+  .lname{font-weight:700;font-size:14px;flex:1}
+  .lrange{color:var(--sub);font-size:13px}
+
+  /* ── rules / values / staff ── */
+  .rule{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin-bottom:8px}
+  .rule .rt{font-weight:700;font-size:14px;margin-bottom:3px}
+  .rule .rd{color:var(--sub);font-size:13px;line-height:1.5}
+  .val{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px}
+  .val .ve{font-weight:700;font-size:14px}
+  .val .ve span{color:var(--accent)}
+  .val .vd{color:var(--sub);font-size:12px;margin-top:2px}
+  .staff{display:flex;justify-content:space-between;background:var(--card);
+    border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin-bottom:8px}
+  .staff .sr{color:var(--sub);font-size:13px}
+  .staff .sn{font-weight:700;font-size:14px}
+  .joinbtn{display:block;text-align:center;background:var(--accent);color:#fff;
+    text-decoration:none;font-weight:700;padding:15px;border-radius:14px;margin:18px 0 8px}
+
+  /* ── install hint ── */
+  .install{background:var(--card2);border:1px dashed var(--line);border-radius:14px;
+    padding:14px;margin-top:14px;font-size:13px;color:var(--sub);line-height:1.6}
+  .install b{color:var(--ink)}
+
+  /* ── bottom nav ── */
+  nav{position:fixed;left:0;right:0;bottom:0;height:calc(var(--nav-h) + var(--safe-b));
+    padding-bottom:var(--safe-b);background:rgba(13,17,24,.92);backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);display:flex;z-index:50}
+  nav button{flex:1;background:none;border:none;color:var(--sub);cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+    font-size:11px;font-weight:600;padding-top:8px}
+  nav button .ni{font-size:20px}
+  nav button.on{color:var(--accent)}
+
+  footer{text-align:center;color:#3a4150;font-size:11px;margin-top:28px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<!-- ══════ 홈 ══════ -->
+<section class="view on" id="v-home">
+  <header>
+    <div class="logo">Team<b>515</b></div>
+    <div class="slogan">5:15 AM. No Excuses.</div>
+  </header>
+  <div class="wrap">
+    <div id="hero"></div>
+    <div class="quick">
+      <div class="qcard"><div class="qn" id="q-races">–</div><div class="ql">예정 레이스</div></div>
+      <div class="qcard"><div class="qn" id="q-members">–</div><div class="ql">운영진</div></div>
+    </div>
+    <div class="motto">
+      <b>Train Together · Race Together · Become Iron Together</b>
+      <div class="m2">혼자 빠른 선수보다, 함께 강한 팀.</div>
+    </div>
+    <div class="install" id="install">
+      📲 <b>홈 화면에 앱으로 추가</b><br>
+      <span id="ios-hint">iPhone: Safari 하단 <b>공유</b> → <b>홈 화면에 추가</b></span><br>
+      <span>Android: Chrome 메뉴(⋮) → <b>앱 설치</b> / <b>홈 화면에 추가</b></span>
+    </div>
+    <footer>미동부 최초·최대·최강의 한인 철인클럽</footer>
+  </div>
+</section>
+
+<!-- ══════ 레이스 ══════ -->
+<section class="view" id="v-race">
+  <header><div class="logo">레이스 캘린더</div>
+    <div class="slogan">함께 출전합니다 🏁</div></header>
+  <div class="wrap">
+    <div class="toggle">
+      <button id="btnUp" class="on" onclick="renderRaces('upcoming')">다가오는</button>
+      <button id="btnPast" onclick="renderRaces('past')">지난 레이스</button>
+    </div>
+    <div id="raceList"></div>
+    <footer>레이스 추가/수정 → 대외홍보부장 보스코</footer>
+  </div>
+</section>
+
+<!-- ══════ 훈련 ══════ -->
+<section class="view" id="v-train">
+  <header><div class="logo">정기 훈련</div>
+    <div class="slogan">5:15 AM, We Train.</div></header>
+  <div class="wrap">
+    <div id="trainList"></div>
+    <div class="note" id="trainNote"></div>
+    <div class="section-title">팀 레벨 (70.3 기준)</div>
+    <div id="levelList"></div>
+  </div>
+</section>
+
+<!-- ══════ 클럽(규정+가치+운영진) ══════ -->
+<section class="view" id="v-club">
+  <header><div class="logo">클럽 안내</div>
+    <div class="slogan">Commitment · Growth · Team First</div></header>
+  <div class="wrap">
+    <div class="section-title">가입 · 운영 규정</div>
+    <div id="ruleList"></div>
+    <div class="section-title">핵심 가치</div>
+    <div id="valueList"></div>
+    <div class="section-title">운영진</div>
+    <div id="staffList"></div>
+    <a class="joinbtn" id="joinBtn" href="#" target="_blank" rel="noopener">오픈채팅방 입장하기 →</a>
+    <footer>관망·정보수집 목적 입장은 정리됩니다 · 여건 되면 언제든 재가입 환영</footer>
+  </div>
+</section>
+
+<!-- ══════ 하단 네비 ══════ -->
+<nav>
+  <button class="on" data-v="home" onclick="go('home')"><span class="ni">🏠</span>홈</button>
+  <button data-v="race" onclick="go('race')"><span class="ni">🏁</span>레이스</button>
+  <button data-v="train" onclick="go('train')"><span class="ni">🗓️</span>훈련</button>
+  <button data-v="club" onclick="go('club')"><span class="ni">📋</span>클럽</button>
+</nav>
+
+<script src="data.js"></script>
+<script>
+const DIST={sprint:{label:"Sprint",cls:"b-sprint"},oly:{label:"Olympic",cls:"b-oly"},
+  half:{label:"70.3",cls:"b-half"},full:{label:"140.6",cls:"b-full"},etc:{label:"기타",cls:"b-etc"}};
+const MON=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+
+function parse(d){const tbd=/XX/i.test(d);const dt=new Date(d.replace(/XX/i,"01")+"T00:00:00");
+  return{dt,tbd,valid:!isNaN(dt)};}
+function dday(dt){const n=new Date();n.setHours(0,0,0,0);
+  const diff=Math.round((dt-n)/86400000);
+  if(diff===0)return"D-DAY";return diff>0?"D-"+diff:"종료";}
+
+function go(v){
+  document.querySelectorAll(".view").forEach(s=>s.classList.remove("on"));
+  document.getElementById("v-"+v).classList.add("on");
+  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
+  window.scrollTo(0,0);
+}
+
+/* 홈 */
+function renderHome(){
+  const n=new Date();n.setHours(0,0,0,0);
+  const up=DATA.races.map(r=>({...r,p:parse(r.date)})).filter(r=>r.p.valid&&r.p.dt>=n)
+    .sort((a,b)=>a.p.dt-b.p.dt);
+  const hero=document.getElementById("hero");
+  if(up.length){
+    const r=up[0],dt=r.p.dt,di=DIST[r.dist]||DIST.etc;
+    hero.innerHTML=`<div class="hero">
+      <div class="label">NEXT RACE · ${di.label}</div>
+      <div class="rname">${r.name}</div>
+      <div class="rmeta">📍 ${r.place||"장소 미정"} · ${dt.getFullYear()}.${dt.getMonth()+1}${r.p.tbd?" (날짜 미정)":"."+(r.p.tbd?"":dt.getDate())}</div>
+      <div class="dd">${dday(dt)}</div>
+      <div class="ddsub">${(()=>{const n=r.members?r.members.length:0;
+        return n?`👥 ${n}명 출전 예정${r.p.tbd?" · 날짜 미정":""}`
+          :(r.p.tbd?"정확한 날짜 확정 시 카운트 시작":"함께 달릴 사람 모집 중");})()}</div>
+    </div>`;
+  } else {
+    hero.innerHTML=`<div class="hero"><div class="label">NEXT RACE</div>
+      <div class="rname">예정된 레이스 없음</div>
+      <div class="ddsub" style="margin-top:10px">대회 등록하면 보스코에게 알려주세요 🏁</div></div>`;
+  }
+  document.getElementById("q-races").textContent=up.length;
+  document.getElementById("q-members").textContent=DATA.staff.length;
+}
+
+/* 레이스 */
+function renderRaces(mode){
+  document.getElementById("btnUp").classList.toggle("on",mode==="upcoming");
+  document.getElementById("btnPast").classList.toggle("on",mode==="past");
+  const n=new Date();n.setHours(0,0,0,0);
+  let items=DATA.races.map(r=>({...r,p:parse(r.date)})).filter(r=>r.p.valid)
+    .filter(r=>mode==="upcoming"?r.p.dt>=n:r.p.dt<n)
+    .sort((a,b)=>mode==="upcoming"?a.p.dt-b.p.dt:b.p.dt-a.p.dt);
+  const list=document.getElementById("raceList");
+  if(!items.length){list.innerHTML=`<div class="empty-state">${mode==="upcoming"
+    ?"등록된 다가오는 레이스가 없습니다.<br>대회 등록하면 알려주세요! 🏁":"지난 레이스 기록이 없습니다."}</div>`;return;}
+  let html="",cur="";
+  items.forEach(r=>{
+    const dt=r.p.dt,di=DIST[r.dist]||DIST.etc;
+    const ml=MON[dt.getMonth()]+" "+dt.getFullYear();
+    if(ml!==cur){cur=ml;html+=`<div class="month">${ml}</div>`;}
+    const cnt=r.members?r.members.length:0;
+    const mem=cnt?`<span class="chip cnt">👥 ${cnt}명</span>`+r.members.map(m=>`<span class="chip">${m}</span>`).join("")
+      :`<span class="chip empty">참가자 모집 중</span>`;
+    html+=`<div class="card ${mode==='past'?'past':''}">
+      <div class="date"><div class="d">${r.p.tbd?"?":dt.getDate()}</div>
+        <div class="m">${MON[dt.getMonth()]}</div><div class="y">${dt.getFullYear()}</div></div>
+      <div class="cbody"><div class="row1"><span class="rn">${r.name}</span>
+        <span class="badge ${di.cls}">${di.label}</span></div>
+        <div class="meta"><span>📍 ${r.place||"미정"}</span>
+        ${mode==="upcoming"?`<span class="dday">${dday(dt)}</span>`:""}
+        ${r.p.tbd?`<span style="color:#ff9f43">⚠ 날짜 미정</span>`:""}</div>
+        <div class="members">${mem}</div></div></div>`;
+  });
+  list.innerHTML=html;
+}
+
+/* 훈련 */
+function renderTrain(){
+  document.getElementById("trainList").innerHTML=DATA.training.map(t=>
+    `<div class="trow"><div class="tday">${t.day}</div>
+      <div class="ticon">${t.icon}</div><div class="ttitle">${t.title}</div></div>`).join("");
+  document.getElementById("trainNote").textContent="※ "+DATA.trainingNote;
+  document.getElementById("levelList").innerHTML=DATA.levels.map(l=>
+    `<div class="lvl"><span class="ldot" style="background:${l.color}"></span>
+      <span class="lname">${l.name}</span><span class="lrange">${l.range}</span></div>`).join("");
+}
+
+/* 클럽 */
+function renderClub(){
+  document.getElementById("ruleList").innerHTML=DATA.rules.map(r=>
+    `<div class="rule"><div class="rt">${r.t}</div><div class="rd">${r.d}</div></div>`).join("");
+  document.getElementById("valueList").innerHTML=DATA.values.map(v=>
+    `<div class="val"><div class="ve"><span>${v.en}</span> · ${v.ko}</div><div class="vd">${v.d}</div></div>`).join("");
+  document.getElementById("staffList").innerHTML=DATA.staff.map(s=>
+    `<div class="staff"><span class="sr">${s.role}</span><span class="sn">${s.name}</span></div>`).join("");
+  const jb=document.getElementById("joinBtn");
+  if(DATA.joinLink)jb.href=DATA.joinLink; else jb.style.display="none";
+}
+
+/* ───── 구글시트에서 레이스 불러오기 (실패 시 data.js 기본값 폴백) ───── */
+function parseCSV(text){
+  const rows=[];let row=[],cell="",q=false;
+  for(let i=0;i<text.length;i++){const c=text[i];
+    if(q){if(c==='"'){text[i+1]==='"'?(cell+='"',i++):(q=false);}else cell+=c;}
+    else{if(c==='"')q=true;else if(c===','){row.push(cell);cell="";}
+      else if(c==='\n'){row.push(cell);rows.push(row);row=[];cell="";}
+      else if(c!=='\r')cell+=c;}}
+  if(cell.length||row.length){row.push(cell);rows.push(row);}
+  return rows;
+}
+function sheetToRaces(csv){
+  const rows=parseCSV(csv).filter(r=>r.some(c=>c.trim()));
+  if(rows.length<2)return null;
+  const head=rows[0].map(h=>h.trim().toLowerCase());
+  const ix=n=>head.indexOf(n);
+  const out=[];
+  for(let i=1;i<rows.length;i++){
+    const r=rows[i],g=n=>{const k=ix(n);return k>=0?(r[k]||"").trim():"";};
+    const date=g("date"),name=g("name");
+    if(!date||!name)continue;
+    const mem=g("members").split(/[,;、]/).map(s=>s.trim()).filter(Boolean);
+    out.push({date,name,dist:(g("dist")||"etc").toLowerCase(),place:g("place"),members:mem});
+  }
+  return out.length?out:null;
+}
+async function loadRaces(){
+  if(!DATA.SHEET_CSV_URL)return;            // 시트 미설정 → 기본값 사용
+  try{
+    const res=await fetch(DATA.SHEET_CSV_URL,{cache:"no-store"});
+    if(!res.ok)throw 0;
+    const parsed=sheetToRaces(await res.text());
+    if(parsed){DATA.races=parsed;}          // 성공 시에만 교체
+  }catch(e){/* 오프라인/오류 → data.js 기본값 유지 */}
+}
+
+async function init(){
+  renderTrain();renderClub();               // 정적 데이터 즉시 렌더
+  await loadRaces();                         // 시트 시도
+  renderHome();renderRaces("upcoming");      // 레이스 렌더(시트 or 폴백)
+}
+init();
+
+/* PWA */
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
+</script>
+</body>
+</html>

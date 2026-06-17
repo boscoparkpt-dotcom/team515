@@ -1,0 +1,108 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+  @font-face{font-family:'DINCond';src:local('DIN Condensed Bold');}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#07090d;font-family:'Arial Black',sans-serif;padding:40px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1320px;margin:0 auto}
+  .card{background:#0b0e14;border:1px solid #222b38;border-radius:22px;
+    padding:30px;position:relative;aspect-ratio:1/0.92;display:flex;flex-direction:column;
+    align-items:center;justify-content:center}
+  .tag{position:absolute;top:16px;left:20px;color:#5a6473;font:700 13px 'Arial',sans-serif;letter-spacing:1px}
+  .red{fill:#ff3b3b}
+  svg{width:100%;height:auto;overflow:visible}
+  .ttl{text-align:center;color:#8b95a7;font:700 14px Arial,sans-serif;margin-top:40px;letter-spacing:3px}
+</style></head>
+<body>
+<div class="grid">
+
+  <!-- A. SQUARE PRIMARY (앱/인스타) -->
+  <div class="card"><span class="tag">A · SQUARE PRIMARY</span>
+    <svg viewBox="0 0 420 380">
+      <text x="210" y="78" text-anchor="middle" fill="#e8edf5"
+        style="font:italic 800 64px 'DIN Condensed','Arial Narrow Bold';letter-spacing:14px">TEAM</text>
+      <g transform="skewX(-8)">
+        <text x="208" y="240" text-anchor="middle"
+          style="font:900 200px 'Arial Black';letter-spacing:-6px">
+          <tspan fill="#e8edf5">5</tspan><tspan class="red">1</tspan><tspan fill="#e8edf5">5</tspan>
+        </text>
+      </g>
+      <text x="210" y="300" text-anchor="middle" fill="#e8edf5"
+        style="font:700 30px 'DIN Condensed','Arial Narrow Bold';letter-spacing:6px">SWIM · BIKE · RUN</text>
+      <line x1="70" y1="328" x2="350" y2="328" stroke="#ff3b3b" stroke-width="3"/>
+      <text x="210" y="356" text-anchor="middle" fill="#8b95a7"
+        style="font:700 18px Arial;letter-spacing:3px">NY / NJ KOREAN TRI CLUB</text>
+    </svg>
+  </div>
+
+  <!-- B. SUNRISE / 5:15 STORY -->
+  <div class="card"><span class="tag">B · 5:15 SUNRISE (스토리)</span>
+    <svg viewBox="0 0 420 380">
+      <defs><clipPath id="hz"><rect x="0" y="0" width="420" height="232"/></clipPath></defs>
+      <!-- sun -->
+      <circle cx="210" cy="200" r="92" fill="#ff3b3b" opacity="0.18"/>
+      <circle cx="210" cy="200" r="60" fill="#ff3b3b" opacity="0.28"/>
+      <g transform="skewX(-8)">
+        <text x="208" y="232" text-anchor="middle"
+          style="font:900 190px 'Arial Black';letter-spacing:-6px">
+          <tspan fill="#e8edf5">5</tspan><tspan class="red">1</tspan><tspan fill="#e8edf5">5</tspan>
+        </text>
+      </g>
+      <!-- horizon lines -->
+      <line x1="40" y1="250" x2="380" y2="250" stroke="#ff3b3b" stroke-width="4"/>
+      <line x1="80" y1="266" x2="340" y2="266" stroke="#ff3b3b" stroke-width="2" opacity="0.6"/>
+      <line x1="120" y1="278" x2="300" y2="278" stroke="#ff3b3b" stroke-width="2" opacity="0.35"/>
+      <text x="210" y="322" text-anchor="middle" fill="#e8edf5"
+        style="font:italic 800 40px 'DIN Condensed','Arial Narrow Bold';letter-spacing:5px">TEAM · 5:15 AM</text>
+      <text x="210" y="352" text-anchor="middle" fill="#8b95a7"
+        style="font:700 18px Arial;letter-spacing:5px">NO EXCUSES</text>
+    </svg>
+  </div>
+
+  <!-- C. BADGE / CREST -->
+  <div class="card"><span class="tag">C · BADGE / CREST (패치·스티커)</span>
+    <svg viewBox="0 0 380 380">
+      <circle cx="190" cy="190" r="178" fill="none" stroke="#ff3b3b" stroke-width="5"/>
+      <circle cx="190" cy="190" r="160" fill="none" stroke="#2a3340" stroke-width="2"/>
+      <defs>
+        <path id="top" d="M 50 190 A 140 140 0 0 1 330 190"/>
+        <path id="bot" d="M 56 190 A 134 134 0 0 0 324 190"/>
+      </defs>
+      <text fill="#e8edf5" style="font:800 34px 'DIN Condensed','Arial Narrow Bold';letter-spacing:8px">
+        <textPath href="#top" startOffset="50%" text-anchor="middle">TEAM · TRIATHLON</textPath></text>
+      <text fill="#8b95a7" style="font:700 24px 'DIN Condensed','Arial Narrow Bold';letter-spacing:6px">
+        <textPath href="#bot" startOffset="50%" text-anchor="middle">SWIM · BIKE · RUN</textPath></text>
+      <g transform="skewX(-8)">
+        <text x="188" y="232" text-anchor="middle"
+          style="font:900 130px 'Arial Black';letter-spacing:-4px">
+          <tspan fill="#e8edf5">5</tspan><tspan class="red">1</tspan><tspan fill="#e8edf5">5</tspan>
+        </text>
+      </g>
+      <text x="190" y="262" text-anchor="middle" fill="#ff3b3b"
+        style="font:700 18px Arial;letter-spacing:4px">NY / NJ</text>
+    </svg>
+  </div>
+
+  <!-- D. HORIZONTAL WORDMARK (키트·배너) -->
+  <div class="card"><span class="tag">D · HORIZONTAL (키트·웹헤더)</span>
+    <svg viewBox="0 0 460 230">
+      <text x="36" y="92" fill="#e8edf5"
+        style="font:italic 800 44px 'DIN Condensed','Arial Narrow Bold';letter-spacing:8px">TEAM</text>
+      <g transform="skewX(-8)">
+        <text x="36" y="180"
+          style="font:900 130px 'Arial Black';letter-spacing:-4px">
+          <tspan fill="#e8edf5">5</tspan><tspan class="red">1</tspan><tspan fill="#e8edf5">5</tspan>
+        </text>
+      </g>
+      <line x1="270" y1="70" x2="270" y2="180" stroke="#ff3b3b" stroke-width="4"/>
+      <text x="292" y="108" fill="#e8edf5"
+        style="font:700 30px 'DIN Condensed','Arial Narrow Bold';letter-spacing:3px">SWIM</text>
+      <text x="292" y="142" fill="#e8edf5"
+        style="font:700 30px 'DIN Condensed','Arial Narrow Bold';letter-spacing:3px">BIKE</text>
+      <text x="292" y="176" fill="#e8edf5"
+        style="font:700 30px 'DIN Condensed','Arial Narrow Bold';letter-spacing:3px">RUN</text>
+    </svg>
+  </div>
+
+</div>
+<div class="ttl">TEAM 515 · LOGO CONCEPTS by Claude</div>
+</body></html>
