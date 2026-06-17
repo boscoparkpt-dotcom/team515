@@ -75,6 +75,12 @@ const DATA = {
     { role:"고문", name:"Junho" },
   ],
 
+  /* ───── 홈 하이라이트 (공개) ─────
+     사진 1장 또는 영상 1개. 비우면 섹션 자체가 안 보임.
+     img: 레포 경로(예: "img/highlight.jpg") 또는 이미지 URL
+     video: 유튜브/IG 링크 (있으면 영상 우선) */
+  highlight: { img:"", video:"", caption:"" },
+
   /* ───── 외부 연결 링크 ─────
      공개 가입 동선 = 인스타 DM 문의. (오픈채팅은 운영진이 직접 초대 → 앱에 공개 안 함) */
   instagram: "https://www.instagram.com/team515_tri/",   // 공개 가입 CTA가 여기로 연결됨
