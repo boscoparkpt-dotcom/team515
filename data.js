@@ -19,11 +19,11 @@ const DATA = {
      ※ 아래는 예시 — 실제 대회 날짜는 확인 후 입력하세요(미정은 XX 유지). */
   races: [
     { date:"2026-07-19", name:"SuperTri NJ", dist:"oly",  place:"New Jersey",
-      members:["Bosco"] },
+      members:["Bosco","Ray","Junho"] },
     { date:"2026-09-26", name:"IRONMAN 70.3 Jones Beach", dist:"half", place:"Jones Beach, NY",
       members:["Bosco"] },
     { date:"2026-10-10", name:"Big Apple Triathlon", dist:"oly", place:"New York",
-      members:["Bosco"] },
+      members:["Bosco","Ray"] },
     { date:"2027-07-XX", name:"IRONMAN 70.3 Musselman", dist:"half", place:"Geneva, NY",
       members:["Bosco"], note:"2027년 7월 · 날짜 미발표" },
     // { date:"2026-08-XX", name:"대회명", dist:"sprint", place:"장소", members:["이름","이름"] },
