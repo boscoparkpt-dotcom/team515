@@ -59,6 +59,7 @@
   .btn.primary{background:var(--accent);color:#fff}
   .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
   .btn.block{display:block;text-align:center;width:100%;padding:16px}
+  .btn.disabled,.joinbtn.disabled{opacity:.45;pointer-events:none}
 
   /* ── about ── */
   .about{background:var(--card);border:1px solid var(--line);border-radius:16px;
@@ -194,8 +195,7 @@
       <div class="lhero-pitch">미동부 최초 · 최대 · 최강<br>한인 철인클럽</div>
       <div class="slogan big">"5:15 AM. No Excuses."</div>
       <div class="cta-row">
-        <a class="btn primary" id="ctaJoin" href="#" target="_blank" rel="noopener">가입 문의 →</a>
-        <a class="btn ghost" id="ctaIG" href="#" target="_blank" rel="noopener">📷 Instagram</a>
+        <a class="btn primary" id="ctaJoin" href="#" target="_blank" rel="noopener">📷 Instagram DM 문의</a>
       </div>
     </div>
   </div>
@@ -235,8 +235,8 @@
     <!-- JOIN CTA -->
     <div class="joincta">
       <div class="jc-t">한번 해볼까 말고, <b>하고 싶다</b>는 당신을 찾습니다</div>
-      <a class="btn primary block" id="ctaJoin2" href="#" target="_blank" rel="noopener">오픈채팅방 입장하기 →</a>
-      <div class="jc-s">관망·정보수집 목적은 정리됩니다 · 자세한 규정은 아래 [클럽] 탭</div>
+      <a class="btn primary block" id="ctaJoin2" href="#" target="_blank" rel="noopener">📷 Instagram DM으로 문의 →</a>
+      <div class="jc-s">관심 있으면 인스타 DM 주세요 · 운영진이 직접 안내합니다</div>
     </div>
 
     <!-- INSTALL -->
@@ -286,7 +286,7 @@
     <div id="valueList"></div>
     <div class="section-title">운영진</div>
     <div id="staffList"></div>
-    <a class="joinbtn" id="joinBtn" href="#" target="_blank" rel="noopener">오픈채팅방 입장하기 →</a>
+    <a class="joinbtn" id="joinBtn" href="#" target="_blank" rel="noopener">📷 Instagram DM으로 문의 →</a>
     <footer>관망·정보수집 목적 입장은 정리됩니다 · 여건 되면 언제든 재가입 환영</footer>
   </div>
 </section>
@@ -342,12 +342,6 @@ function renderHome(){
   }
   document.getElementById("q-races").textContent=up.length;
   document.getElementById("q-members").textContent=DATA.staff.length;
-
-  // 링크
-  [ "ctaJoin","ctaJoin2" ].forEach(id=>{const el=document.getElementById(id);
-    if(DATA.joinLink)el.href=DATA.joinLink; else el.style.display="none";});
-  const ig=document.getElementById("ctaIG");
-  if(DATA.instagram)ig.href=DATA.instagram; else ig.style.display="none";
 
   // 주간 훈련 미리보기
   document.getElementById("trainPreview").innerHTML=DATA.training.map(t=>
@@ -405,8 +399,17 @@ function renderClub(){
     `<div class="val"><div class="ve"><span>${v.en}</span> · ${v.ko}</div><div class="vd">${v.d}</div></div>`).join("");
   document.getElementById("staffList").innerHTML=DATA.staff.map(s=>
     `<div class="staff"><span class="sr">${s.role}</span><span class="sn">${s.name}</span></div>`).join("");
-  const jb=document.getElementById("joinBtn");
-  if(DATA.joinLink)jb.href=DATA.joinLink; else jb.style.display="none";
+}
+
+/* 공개 가입 CTA = 인스타 DM. 인스타 미설정이면 "오픈 예정"으로 비활성 */
+function setContactCTA(){
+  const ig=DATA.instagram;
+  ["ctaJoin","ctaJoin2","joinBtn"].forEach(id=>{
+    const el=document.getElementById(id); if(!el)return;
+    if(ig){el.href=ig;el.classList.remove("disabled");}
+    else{el.removeAttribute("href");el.classList.add("disabled");
+      el.textContent="📷 Instagram 오픈 예정";}
+  });
 }
 
 /* ───── 구글시트에서 레이스 불러오기 (실패 시 data.js 기본값 폴백) ───── */
@@ -446,9 +449,9 @@ async function loadRaces(){
 }
 
 async function init(){
-  renderTrain();renderClub();               // 정적 데이터 즉시 렌더
-  await loadRaces();                         // 시트 시도
-  renderHome();renderRaces("upcoming");      // 레이스 렌더(시트 or 폴백)
+  renderTrain();renderClub();setContactCTA(); // 정적 데이터 즉시 렌더
+  await loadRaces();                          // 시트 시도
+  renderHome();renderRaces("upcoming");       // 레이스 렌더(시트 or 폴백)
 }
 init();
 

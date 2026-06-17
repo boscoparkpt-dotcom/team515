@@ -19,13 +19,13 @@ const DATA = {
      ※ 아래는 예시 — 실제 대회 날짜는 확인 후 입력하세요(미정은 XX 유지). */
   races: [
     { date:"2026-07-19", name:"SuperTri NJ", dist:"oly",  place:"New Jersey",
-      members:["보스코"] },
+      members:["Bosco"] },
     { date:"2026-09-26", name:"IRONMAN 70.3 Jones Beach", dist:"half", place:"Jones Beach, NY",
-      members:["보스코"] },
+      members:["Bosco"] },
     { date:"2026-10-10", name:"Big Apple Triathlon", dist:"oly", place:"New York",
-      members:["보스코"] },
+      members:["Bosco"] },
     { date:"2027-07-XX", name:"IRONMAN 70.3 Musselman", dist:"half", place:"Geneva, NY",
-      members:["보스코"], note:"2027년 7월 · 날짜 미발표" },
+      members:["Bosco"], note:"2027년 7월 · 날짜 미발표" },
     // { date:"2026-08-XX", name:"대회명", dist:"sprint", place:"장소", members:["이름","이름"] },
   ],
 
@@ -68,14 +68,15 @@ const DATA = {
 
   /* ───── 운영진 ───── */
   staff: [
-    { role:"팀장", name:"레이리 (Ray Lee)" },
-    { role:"부팀장", name:"쌤 (Sam)" },
-    { role:"총무", name:"좐킴 (John B Kim)" },
-    { role:"대외홍보부장", name:"보스코" },
-    { role:"고문", name:"이준호" },
+    { role:"팀장", name:"Ray Lee" },
+    { role:"부팀장", name:"Sam" },
+    { role:"총무", name:"John Kim" },
+    { role:"대외홍보부장", name:"Bosco" },
+    { role:"고문", name:"Junho" },
   ],
 
-  /* ───── 외부 연결 링크 ───── */
-  joinLink: "https://open.kakao.com/o/gwuyx2zi",  // 카카오톡 오픈채팅(가입)
-  instagram: "",                                   // 인스타 주소 (예: https://instagram.com/team515) — 생기면 넣기
+  /* ───── 외부 연결 링크 ─────
+     공개 가입 동선 = 인스타 DM 문의. (오픈채팅은 운영진이 직접 초대 → 앱에 공개 안 함) */
+  instagram: "",   // 인스타 주소 (예: https://instagram.com/team515) — 생기면 넣기. 공개 CTA가 여기로 연결됨
+  kakaoInviteLink: "https://open.kakao.com/o/gwuyx2zi",  // ※수동 초대용 참고. 앱에 노출 안 함
 };
